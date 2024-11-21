@@ -79,6 +79,45 @@ app.get('/api/books/:id', async (req, res) => {
   }
 });
 
+app.post('/api/getBookSummary', async (req, res) => {
+    const { bookName } = req.body;
+
+    if (!bookName) {
+        return res.status(400).send('Book name is required');
+    }
+
+    try {
+
+        const existingBook = await Book.findOne({ title: new RegExp(bookName, 'i') });
+
+        if (existingBook) {
+            return res.json({ summary: existingBook.summary });
+        }
+
+        const response = await axios.post(
+            'https://api.openai.com/v1/completions',
+            {
+                model: 'gpt-3.5-turbo', // Or any latest model
+                prompt: `Provide a brief summary of the book: ${bookName}`,
+                max_tokens: 150,
+                temperature: 0.7,
+            },
+            {
+                headers: {
+                    'Authorization': process.env.API_KEY
+                }
+            }
+        );
+
+        // Return the generated summary
+        const summary = response.data.choices[0].text.trim();
+        res.json({ summary });
+    } catch (error) {
+        console.error('Error fetching summary:', error);
+        res.status(500).send('Failed to get summary');
+    }
+});
+
 app.delete('/api/books/:id', async (req, res) => {
     const { id } = req.params;
   
