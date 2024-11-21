@@ -1,0 +1,52 @@
+/* LandingPage.css */
+
+/* Full-screen background image */
+.landing-page {
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1564773578-96f8b432afc2'); /* A book-themed background image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  /* Dark overlay to make text readable */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Styling the buttons */
+  .btn-light {
+    background-color: #f8f9fa;
+    color: #333;
+    border: none;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+  }
+  
+  .btn-light:hover {
+    background-color: #fff;
+    color: #007bff;
+  }
+  
+  /* Heading and text styling */
+  .display-4 {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+  }
+  
+  .lead {
+    font-size: 1.25rem;
+    font-style: italic;
+  }
+  
